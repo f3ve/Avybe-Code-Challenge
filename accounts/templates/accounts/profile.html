@@ -1,8 +1,12 @@
-{% extends './index.html' %}
+{% extends './index.html' %} 
 
 {% block content %}
-    <h1>Welcome to your profile {{ p.nickname }}</h1>
-    <img src="{{ p.image.url }}" alt="{{user.profile.nickname}}'s profile picture" width="200">
-    <a href="{% url 'updateProfile' p.id %}">update-profile</a>
-    <a href="{% url 'logout' %}">Logout</a>
+  <h1>Welcome to your profile {{ p.nickname }}</h1>
+  <img
+    src="{{ p.image.url }}"
+    alt="{{user.profile.nickname}}'s profile picture"
+    width="200"
+  />
+  <a href="{% url 'updateProfile' p.id %}">update-profile</a>
+  <a href="{% url 'logout' %}">Logout</a>
 {% endblock %}

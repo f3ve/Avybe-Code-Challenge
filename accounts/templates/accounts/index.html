@@ -2,43 +2,44 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avybe Code Challenge</title>
-  <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
-</head>
-<body>
-  <nav>
-    <a href="{% url 'home' %}">Home</a>
-  </nav>
-  <main>
-    {% block content %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avybe Code Challenge</title>
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'home' %}">Home</a>
+    </nav>
+    <main>
+      {% block content %}
       <h1>Avybe Code Challenge Landing Page</h1>
       {% if user.is_authenticated %}
       <p>
-        Looks like you are already signed in!</p>
-        <a href="{% url 'logout' %}">
-          Logout
+        Looks like you are already signed in!
+      </p>
+      <a href="{% url 'logout' %}">
+        Logout
+      </a>
+      or
+      <a href="{% url 'profile' %}">
+        View Profile
+      </a>
+      {% else %}
+      <p>
+        To get started
+        <a href="{% url 'login_url' %}">
+          Login
         </a>
         or
-        <a href="{% url 'profile' %}">
-          View Profile
+        <a href="{% url 'register_url' %}">
+          Register
         </a>
-        {% else %}
-        <p>
-          To get started
-          <a href="{% url 'login_url' %}">
-            Login
-          </a> 
-          or 
-          <a href="{% url 'register_url' %}">
-            Register
-          </a>
-        </p>
+      </p>
       {% endif %}
     </main>
 
-  {% endblock %}
-</body>
+    {% endblock %}
+  </body>
 </html>
