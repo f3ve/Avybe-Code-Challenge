@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django import forms
 from .models import Profile
@@ -11,7 +12,13 @@ def indexView(request):
 
 @login_required
 def profileView(request):
-  return render(request, 'accounts/profile.html')
+  currentUser = request.user
+  try:
+    p = Profile.objects.get(user=currentUser)
+  except (Profile.DoesNotExist):
+    return render(request, 'accounts/profile.html')
+  else: 
+    return render(request, 'accounts/profile.html', {'p':p})
 
 def registerView(request):
   if request.method == "POST":
@@ -24,13 +31,7 @@ def registerView(request):
 
   return render(request, 'registration/register.html', {'form':form})
 
-class PostForm(forms.ModelForm):
-  class Meta:
-    model = Profile
-    fields = ['user', 'nickname', 'image']
-
-class CreateProfile(CreateView):
+class CreateProfile(LoginRequiredMixin, CreateView):
   model = Profile
-  form_class = PostForm
-  template_name = 'accounts/profile_form.html'
+  fields = ['image', 'nickname', 'user']
   success_url = reverse_lazy('profile')
