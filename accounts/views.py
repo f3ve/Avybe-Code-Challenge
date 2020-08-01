@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django import forms
 from .models import Profile
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 def indexView(request):
   return render(request, 'accounts/index.html')
@@ -16,7 +16,7 @@ def profileView(request):
   try:
     p = Profile.objects.get(user=currentUser)
   except (Profile.DoesNotExist):
-    return render(request, 'accounts/profile.html')
+    return redirect(reverse('createProfile'))
   else: 
     return render(request, 'accounts/profile.html', {'p':p})
 
@@ -33,5 +33,15 @@ def registerView(request):
 
 class CreateProfile(LoginRequiredMixin, CreateView):
   model = Profile
-  fields = ['image', 'nickname', 'user']
+  fields = ['image', 'nickname']
   success_url = reverse_lazy('profile')
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+class UpdateProfile(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['image', 'nickname']
+  success_url = reverse_lazy('profile')
+  template_name = 'accounts/update-profile.html'

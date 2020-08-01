@@ -1,15 +1,8 @@
 {% extends './index.html' %}
 
 {% block content %}
-  {% if p %}
-    <h1>YAY PROFILE of {{ p.nickname }}</h1>
+    <h1>Welcome to your profile {{ p.nickname }}</h1>
     <img src="{{ p.image.url }}" alt="{{user.profile.nickname}}'s profile picture" width="200">
-    <a href="{% url 'updateProfile'}">update-profile</a>
+    <a href="{% url 'updateProfile' p.id %}">update-profile</a>
     <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <h1>YAY PROFILE of {{ user.username }}</h1>
-    <p>You still need to add a profile image and nickname!</p>
-    <a href="{% url 'createProfile' %}">Create Profile</a>
-    <a href="{% url 'logout' %}">Logout</a>
-  {% endif %}
 {% endblock %}

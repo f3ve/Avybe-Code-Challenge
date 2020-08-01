@@ -9,5 +9,6 @@ urlpatterns = [
   path('register/', views.registerView, name='register_url'),
   path('profile/', views.profileView, name='profile'),
   path('logout/', LogoutView.as_view(next_page='profile'), name='logout'),
-  path('create-profile/', views.CreateProfile.as_view(), name='createProfile')
+  path('create-profile/', views.CreateProfile.as_view(), name='createProfile'),
+  path('<int:pk>/update-profile/', views.UpdateProfile.as_view(), name='updateProfile'),
 ]
