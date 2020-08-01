@@ -13,8 +13,8 @@
       <p>Or</p>
       <a href="{% url 'profile' %}">View Profile</a>
       {% else %}
-      <a href="{% url 'login_url' %}">Logout</a>
-      <a href="{% url 'register_url' %}">Logout</a>
+      <a href="{% url 'login_url' %}">Login</a>
+      <a href="{% url 'register_url' %}">Register</a>
     {% endif %}
 
   {% endblock %}

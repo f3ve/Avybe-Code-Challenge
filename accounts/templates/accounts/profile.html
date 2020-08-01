@@ -1,5 +1,10 @@
 {% extends './index.html' %}
 
 {% block content %}
-<h1>YAY PROFILE of {{user.username}}</h1>
+  {% if user.profile.nickname %}
+  <h1>YAY PROFILE of {{ user.profile.nickname }}</h1>
+  <img src="{{ user.profile.image.url }}" alt="{{user.profile.nickname}}'s name">
+  {% endif %}
+<h1>YAY PROFILE of {{ user.username }}</h1>
+<p>You still need to add a profile image and nickname!</p>
 {% endblock %}
