@@ -2,10 +2,12 @@
 
 ## Set up
 
-Clone this Repo
+Clone this Repo and cd into it
 
 ```bash
 $ git clone https://github.com/f3ve/Avybe-Code-Challenge.git
+
+$ cd Avybe-Code-Challenge
 ```
 
 Migrate:
